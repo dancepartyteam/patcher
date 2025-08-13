@@ -1,0 +1,35 @@
+{
+  "name": "patcher-wii",
+  "description": "PatcherWii patches games that are supported by DanceParty to have access to it's servers.",
+  "version": "2.1.4",
+  "bin": "index.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "buffer-replace": "^1.0.0",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7",
+    "util": "^0.12.5",
+    "winston": "^3.9.0",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": "^17 || ^16 || ^14 || ^12"
+  },
+  "pkg": {
+    "targets": [
+      "node16-win-x64"
+    ],
+    "outputPath": "dist",
+    "assets": [
+      "./bin/wit/**"
+    ]
+  }
+}
