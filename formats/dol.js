@@ -67,6 +67,11 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
 
   // Determine strings to be used with STRINGS_VERSION, if not exist, use default strings STRINGS_LEGACY
   let STRINGS_USED = global.config[`STRINGS_${version}`] ? global.config[`STRINGS_${version}`] : global.config[`STRINGS_LEGACY`];
+  console.log(game)
+  if (game.isLyN) {
+    logger.info("Detected a LyN game, patching NAS and Shop only...");
+    STRINGS_USED = global.config.STRINGS_LYN;
+  }
 
   logger.info('Patching DOL file! Please wait...');
 

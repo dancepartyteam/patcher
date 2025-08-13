@@ -96,7 +96,7 @@ if (!existsSync(appDataPath)) {
       await WBFS({ game, gameId, region, version: game.version, inputFile: inputPath });
       break;
     case "DOL":
-      await DOL({ version: game.version, inputFile: inputPath });
+      await DOL({ game, version: game.version, inputFile: inputPath });
       break;
   };
 

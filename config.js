@@ -53,12 +53,18 @@ module.exports.STRINGS_2014 = {
     ...SHOP_SERVICE
 };
 
+module.exports.STRINGS_LYN = {
+    ...NAS_SERVICE,
+    ...SHOP_SERVICE
+};
+
 module.exports.GAMES = [
     { version: 2018, ids: { SE8P41: { r: PAL }, SE8E41: { r: NTSC } } },
     { version: 2017, ids: { SZ7P41: { r: PAL }, SZ7E41: { r: NTSC } } },
     { version: 2016, ids: { SJNP41: { r: PAL }, SJNE41: { r: NTSC } } },
     { version: 2015, ids: { SE3P41: { r: PAL }, SE3E41: { r: NTSC } }, isJD15: true },
-    { version: 2014, ids: { SJOP41: { r: PAL }, SJOE41: { r: NTSC } }, isJD14: true }
+    { version: 2014, ids: { SJOP41: { r: PAL }, SJOE41: { r: NTSC } }, isJD14: true },
+    { version: 2, ids: { SD2Y41: { r: NTSC } }, isLyN: true, string: "Just Dance 2 SE" }
 ];
 
 // Game IDs for JD2014 (including mods)
