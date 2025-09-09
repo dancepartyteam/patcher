@@ -3,12 +3,12 @@ const PAL = "PAL";
 const NTSC = "NTSC";
 
 // Server domains
-const NAS = 'nas.wiimmfi.de';
-const SHOP = 'sh.ryuatelier.org';
-const GS_WDF = 'gs-wdf.lgc.danceparty.lol';
-const GS_WDF_JD5 = 'gs-wdf-jd5.lgc.danceparty.lol';
-const GS_RHODE = 'gs-rhode.lgc.danceparty.lol';
-const TRACKING = 'trk-wii.lgc.danceparty.lol';
+const NAS = '12000.termy.lol';
+const SHOP = 's.ryuatelier.org';
+const GS_WDF = 'wdfjd6.termy.lol';
+const GS_WDF_JD5 = 'wdf.termy.lol';
+const GS_RHODE = 'rvl-nodejsrv.ryuatelier.org';
+const TRACKING = 'wiitrack.termy.lol';
 
 // Room names
 const ROOM_LEGACY = "legacy"; // 2016 - 2017 - 2018 and above
@@ -75,4 +75,4 @@ module.exports.JD5_IDS = [
 ];
 
 // These are our old server domains, this is used to detect DOL files with old URLs.
-module.exports.OLD_DOMAINS = ["danceparty.online", "dancepartyonline.tk"];
+module.exports.OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk"];
