@@ -1,6 +1,6 @@
-# PatcherWii
+# Patcher
 
-PatcherWii is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii to let you access the **DanceParty Legacy** world. 
+Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii to let you access the **DanceParty Legacy**. 
 
 ## What files can I patch?
 - [X] ISO
@@ -15,14 +15,14 @@ There are three different ways you can use PatcherWii:
 
 ### 1. Downloading Pre-built Releases
 
-You can easily download pre-built releases of PatcherWii from the [releases page](https://github.com/dancepartyonline/patcher-wii/tags). Once downloaded, simply drag and drop your WBFS / ISO or DOL  file onto the tool, and it will automatically patch it for you.
+You can easily download pre-built releases of PatcherWii from the [releases page](https://github.com/dancepartyteam/patcher/tags). Once downloaded, simply drag and drop your WBFS / ISO or DOL  file onto the tool, and it will automatically patch it for you.
 
 ### 2. Running with Node.JS
 
 To run PatcherWii with Node.JS, follow these steps:
 
 1. Ensure you have Node.JS version 16 or higher installed on your system.
-2. Clone the PatcherWii repository using the command: `git clone https://github.com/dancepartyonline/patcher-wii.git && cd patcher-wii`
+2. Clone the PatcherWii repository using the command: `git clone https://github.com/dancepartyteam/patcher.git && cd patcher-wii`
 3. Install the necessary dependencies with the command: `npm i`
 4. Once the installation is complete, you can run the tool and view the available CLI options by executing `node index.js`.
 5. To patch a bundle directly, use the following command: `node index.js path/to/wbfs/iso/or/dol`.
@@ -35,7 +35,7 @@ If you prefer to build PatcherWii from source, follow these steps:
 
 1. Ensure you have Node.JS version 16 or higher installed on your system.
 2. Install the "pkg" package globally using the command: `npm i -g pkg`.
-3. Clone the PatcherWii repository using the command: `git clone https://github.com/dancepartyonline/patcher-wii.git && cd patcher-wii`.
+3. Clone the PatcherWii repository using the command: `git clone https://github.com/dancepartyteam/patcher.git && cd patcher-wii`.
 4. Install the necessary dependencies with the command: `npm i`.
 5. Build the tool using the command: `pkg .`.
 6. Once the build process is complete, you can find the built packages in the `dist/` directory.
@@ -74,5 +74,4 @@ Please note that Just Dance 2019 and 2020 do not have World Dance Floor support.
 
 - [X] Just Dance Japan *(by Yunyl)*
 
-If you require further assistance, feel free to join our [Discord server](https://discord.gg/d4t6cqbmmk). We'll be happy to help!
-# patcher
+If you require further assistance, feel free to join our [Discord server](https://discord.gg/ytTVbhrqVe). We'll be happy to help!
