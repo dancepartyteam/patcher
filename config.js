@@ -27,13 +27,28 @@ const SHOP_SERVICE = {
 };
 
 // WDF
-const WDF = (room) => {};
+const WDF = (room) => {
+    if (room == ROOM_JD5)
+        return {
+            'https://tracking-wii-dance.ubisoft.com/wdf/': `http://${GS_WDF_JD5}/${ROOM_JD5}/`,
+        };
+    else return {
+        'https://wii-dance6-ws1.ubisoft.com/wdfjd6': `http://${GS_WDF}/${room}`,
+        'https://wii-dance6-ws1.ubisoft.com': `http://${GS_WDF}`,
+        'wdfjd6': room,
+        'wii-dance6-ws1.ubisoft.com': GS_WDF,
+    };
+};
 
 // RHODE (JMCS)
-const RHODE_SERVICE = {};
+const RHODE_SERVICE = {
+    'https://wii-dance6-ws2.ubisoft.com': `http://${GS_RHODE}`,
+};
 
 // TRACKING
-const TRACKING_SERVICE = {};
+const TRACKING_SERVICE = {
+    'https://tracking-wii-dance.ubisoft.com': `http://${TRACKING}`,
+};
 
 // Strings for LEGACY replacement
 module.exports.STRINGS_LEGACY = {
