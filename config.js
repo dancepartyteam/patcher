@@ -53,19 +53,24 @@ const TRACKING_SERVICE = {
 // Strings for LEGACY replacement
 module.exports.STRINGS_LEGACY = {
     ...NAS_SERVICE,
-    ...SHOP_SERVICE
+    ...SHOP_SERVICE,
+    ...WDF(ROOM_LEGACY),
+    ...RHODE_SERVICE,
+    ...TRACKING_SERVICE
 };
-
 // Strings for JD2015 replacement
 // Use the same strings as Legacy but replace legacy room name with JD2015
 module.exports.STRINGS_2015 = {
-    ...this.STRINGS_LEGACY
+    ...this.STRINGS_LEGACY,
+    [ROOM_LEGACY]: ROOM_JD2015
 };
 
 // Strings for JD2014 replacement
 module.exports.STRINGS_2014 = {
     ...NAS_SERVICE,
-    ...SHOP_SERVICE
+    ...SHOP_SERVICE,
+    ...WDF(ROOM_JD5),
+    ...TRACKING_SERVICE
 };
 
 module.exports.STRINGS_LYN = {
