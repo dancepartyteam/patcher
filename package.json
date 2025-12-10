@@ -1,10 +1,11 @@
 {
-  "name": "patcher-wii",
-  "description": "PatcherWii patches games that are supported by DanceParty to have access to it's servers.",
-  "version": "2.1.4",
+  "name": "patcher",
+  "description": "Patcher patches games that are supported by DanceParty to have access to it's servers.",
+  "version": "3.0.0",
   "bin": "index.js",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,7 +22,7 @@
     "yargs": "^17.7.2"
   },
   "engines": {
-    "node": "^17 || ^16 || ^14 || ^12"
+    "node": "^17 || ^16 || ^14 || ^12 || ^22"
   },
   "pkg": {
     "targets": [

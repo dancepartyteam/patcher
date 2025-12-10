@@ -3,9 +3,9 @@ const format = "ISO";
 const path = require("path");
 const { existsSync, rmSync, unlinkSync } = require("fs");
 
-const wit = require("../lib/wit");
+const wit = require("../../lib/wit");
 const DOL = require("./dol");
-const utils = require("../lib/utils");
+const utils = require("../../lib/utils");
 
 module.exports = async ({ game, gameId, region, version, inputFile }) => {
 

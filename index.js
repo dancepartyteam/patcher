@@ -4,9 +4,7 @@ const { resolve } = require("path");
 const { existsSync, statSync, mkdirSync } = require("fs");
 
 const project = require("./package.json");
-const config = require("./config");
 const cli = require("./lib/cli");
-const patcher = require("./lib/patcher");
 const utils = require("./lib/utils");
 const logger = require("./lib/logger");
 
@@ -18,45 +16,39 @@ const exit = (code = 0) => {
 };
 
 // Make sure our %APPDATA% folder exists each launch.
-const appDataPath = resolve(process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share"), project.name);
+const appDataPath = resolve(
+  process.env.APPDATA || 
+  (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share"), project.name);
+
 if (!existsSync(appDataPath)) {
   mkdirSync(appDataPath, { recursive: true });
 };
 
-
 // Entry function
 (async () => {
 
-  // Set global variables
-
-  // BUG: Our package bundler "pkg" does not allow the "bin" folder 
-  // that contains WIT to be included in the executable so we have 
-  // to copy the bin folder to user's %APPDATA% folder, and run it from there each run.
-  //await utils.copyBin();
-
-
   // Call CLI
   const args = cli();
+
   // Set global variables
   global.root = __dirname;
   global.logger = logger;
-  global.config = config;
   global.project = project;
   global.appData = appDataPath;
   global.args = args;
   global.isDebug = (args.debug && args.debug == true) || false;
   global.logLevel = global.isDebug ? "debug" : "info";
-  //console.log(global.isDebug, global.logLevel)
 
   const Games = require("./lib/games");
 
-  const ISO = require("./formats/iso");
-  const WBFS = require("./formats/wbfs");
-  const DOL = require("./formats/dol");
+  // Formats
+  const ISO = require("./formats/wii/iso");
+  const WBFS = require("./formats/wii//wbfs");
+  const DOL = require("./formats/wii/dol");
 
   const inputPath = args["_"][0]; // Input file
   if (!existsSync(inputPath) || !statSync(inputPath).isFile()) {
-    logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS or a DOL file.`);
+    logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS, DOL or BIN file.`);
     process.exit(1);
   }
 
@@ -64,7 +56,7 @@ if (!existsSync(appDataPath)) {
   // If input is DOL it will also find it's jdVersion via dol-game-finder lib
   const detectedFormat = await utils.detectFormat(inputPath);
   if (!detectedFormat) {
-    logger.error(`Couldn"t detect the format of the input file, please provide an ISO, WBFS or a DOL file.`);
+    logger.error(`Couldn't detect the format of the input file, please provide an ISO, WBFS, DOL or BIN file.`);
     process.exit(1);
   };
 

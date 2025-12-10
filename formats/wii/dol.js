@@ -4,12 +4,14 @@ const fs = require("fs");
 const { resolve, dirname } = require("path");
 const replace = require("buffer-replace");
 
+const config = require("../../config");
+
 module.exports = async ({ format, game, gameId, region, version, inputFile, isFromFormat, backup = true }) => {
 
   let mainDol = fs.readFileSync(inputFile);
 
   // Check if the dol contains any old server URLs we used before.
-  let oldDomains = global.config.OLD_DOMAINS;
+  let oldDomains = config.WII.OLD_DOMAINS;
   oldDomains.forEach(d => {
     if (mainDol.includes(Buffer.from(d))) {
       logger.error(`Your DOL file is not an original file because it contains our old servers and must be updated. Please update it by patching the original DOL file.`);
@@ -43,7 +45,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
     };
 
     // Check if the JD5 game is available to patch
-    if (!global.config.JD5_IDS.includes(gameId)) {
+    if (!config.WII.JD5_IDS.includes(gameId)) {
       logger.error(`Your 'main.dol' ID ${gameId} is not available to patch.`);
       process.exit(1);
     };
@@ -66,23 +68,24 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   };
 
   // Determine strings to be used with STRINGS_VERSION, if not exist, use default strings STRINGS_LEGACY
-  let STRINGS_USED = global.config[`STRINGS_${version}`] ? global.config[`STRINGS_${version}`] : global.config[`STRINGS_LEGACY`];
-  console.log(game)
+  let STRINGS_USED = config.WII[`STRINGS_${version}`] || config.WII.STRINGS_LEGACY;
   if (game.isLyN) {
     logger.info("Detected a LyN game, patching NAS and Shop only...");
-    STRINGS_USED = global.config.STRINGS_LYN;
-  }
+    STRINGS_USED = config.WII.STRINGS_LYN;
+  };
 
   logger.info('Patching DOL file! Please wait...');
 
   let index = 0;
   for (const [key, value] of Object.entries(STRINGS_USED)) {
-    // key = original string
-    // value = string to replace
-    const keyLen = key.length;
-    const valueLen = value.length;
-    const keyBuffer = Buffer.from(key);
-    let valueBuffer = Buffer.from(value);
+    // value is now an object with 'original' and 'replacement' properties
+    const original = value.original;
+    const replacement = value.replacement;
+
+    const keyLen = original.length;
+    const valueLen = replacement.length;
+    const keyBuffer = Buffer.from(original);
+    let valueBuffer = Buffer.from(replacement);
 
     // str to replace is shorter than original value so we have to add extra 00 at the end
     if (keyLen > valueLen) {
@@ -93,7 +96,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
       const nullsBuf = Buffer.from(nulls, 'hex');
       valueBuffer = Buffer.concat([valueBuffer, nullsBuf]);
 
-      logger.debug(`${value} is shorter than ${key} with difference: ${keyLen - valueLen} / ${keyLen} ${valueLen}`);
+      logger.debug(`${replacement} is shorter than ${original} with difference: ${keyLen - valueLen} / ${keyLen} ${valueLen}`);
       logger.debug();
       logger.debug("------------------------------------------------");
     };
@@ -102,13 +105,13 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
       replacedData = replace(mainDol, keyBuffer, valueBuffer);
       mainDol = replacedData;
       index += 1;
-      logger.debug(`Replaced ${key} with ${value} / key len: ${keyLen} , val len: ${valueLen}`)
+      logger.debug(`Replaced ${original} with ${replacement} / key len: ${keyLen} , val len: ${valueLen}`)
     }
     else {
       // Only throw error about missing Shop URL 
       // if the game has a shop feature but the URL is missing (which is unlikely to happen?)
-      if (!key.includes("shop.wii.com")) {
-        logger.debug(`${key} doesn't exist in the DOL file, are you sure it's the original file?`)
+      if (!original.includes("shop.wii.com")) {
+        logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`)
       };
     };
   };

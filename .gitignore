@@ -3,5 +3,12 @@ dist/
 logs/
 
 *.dol
+*.iso
+*.bin
+*.wbfs
+
+.env
+
+*.log
 
 package-lock.json
