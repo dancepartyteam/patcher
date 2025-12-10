@@ -22,6 +22,12 @@ const SERVERS = {
     }, {
         original: 'https://naswii.nintendowifi.net/pr',
         replacement: 'http://12000.termy.lol/pr'
+    }, {
+        original: "http://naswii.wiimmfi.de/ac",
+        replacement: 'http://12000.termy.lol/ac'
+    }, {
+        original: "http://naswii.wiimmfi.de/pr",
+        replacement: 'http://12000.termy.lol/pr'
     }],
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',

@@ -76,8 +76,17 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
 
   logger.info('Patching DOL file! Please wait...');
 
-  let index = 0;
+  let replacedCount = 0;
+  let totalStrings = 0;
+  const missingStrings = [];
+
   for (const [key, value] of Object.entries(STRINGS_USED)) {
+    // Skip shop URLs if they're optional
+    const isOptionalShop = value.original.includes("shop.wii.com");
+    if (!isOptionalShop) {
+      totalStrings++;
+    }
+
     // value is now an object with 'original' and 'replacement' properties
     const original = value.original;
     const replacement = value.replacement;
@@ -104,25 +113,32 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
     if (mainDol.includes(keyBuffer)) {
       replacedData = replace(mainDol, keyBuffer, valueBuffer);
       mainDol = replacedData;
-      index += 1;
+      replacedCount++;
       logger.debug(`Replaced ${original} with ${replacement} / key len: ${keyLen} , val len: ${valueLen}`)
     }
     else {
-      // Only throw error about missing Shop URL 
-      // if the game has a shop feature but the URL is missing (which is unlikely to happen?)
-      if (!original.includes("shop.wii.com")) {
-        logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`)
-      };
+      // Only track missing non-shop URLs
+      if (!isOptionalShop) {
+        logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`);
+        missingStrings.push(original);
+      }
     };
   };
 
-  // If there was no modified strings
-  if (index == 0) {
-    logger.warn(`None of the strings were replaced, which means your DOL file was not patched. Are you sure it's the original file?`);
+  // Check replacement results
+  if (replacedCount === 0) {
+    logger.error(`None of the strings were replaced. Your DOL file was not patched. Are you sure it's the original file?`);
     process.exit(1);
-  };
+  }
 
-  logger.success('DOL was patched successfully.');
+  if (replacedCount < totalStrings) {
+    logger.warn(`Warning: Only ${replacedCount} out of ${totalStrings} expected strings were replaced.`);
+    logger.warn(`Missing strings: ${missingStrings.join(', ')}`);
+    logger.warn(`This may indicate a corrupted, already-modified, or incorrect DOL file. Please provide an original DOL file to ensure proper patching.`);
+    process.exit(1);
+  }
+
+  logger.success(`DOL was patched successfully. ${replacedCount} strings replaced.`);
 
   // Patching was completed, save the file
   const outputDolPath = resolve(dirname(inputFile), `main.dol`);
