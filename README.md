@@ -1,6 +1,6 @@
 # Patcher
 
-Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii to let you access the **DanceParty Legacy**. 
+Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii and PS3 to let you access the **DanceParty Legacy**. 
 
 ## What files can I patch?
 - [X] ISO

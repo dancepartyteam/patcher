@@ -16,9 +16,9 @@ const ROOMS = {
     JD2018: 'jd2018', // 2018
     JD2019: 'jd2019', // 2019
     JD2020: 'jd2020', // 2020
+    JDASIA: 'jdasia', // JD Asia
     JD5: 'jd5', // 2014
 };
-
 
 const SERVERS = {
     NAS: [{
@@ -101,13 +101,45 @@ const STRINGS_LYN = {
 
 const GAMES = [
     {
+        version: 1000,
+        name: "Just Dance Asia",
+        ids: {
+            ASIE41: { r: PAL },
+        },
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JDASIA,
+        isAvailable: false
+    },
+    {
+        version: 2020,
+        name: "Just Dance 2020",
+        ids: {
+            ASIE41: { r: PAL },
+        },
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JD2020,
+        isAvailable: false
+    },
+    {
+        version: 2019,
+        name: "Just Dance 2019",
+        ids: {
+            ASIE41: { r: PAL },
+        },
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JD2019,
+        isAvailable: false
+    },
+    {
         version: 2018,
         name: "Just Dance 2018",
         ids: {
             SE8P41: { r: PAL },
             SE8E41: { r: NTSC }
         },
-        strings: STRINGS_LEGACY
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JD2018,
+        isAvailable: true
     },
     {
         version: 2017,
@@ -116,7 +148,9 @@ const GAMES = [
             SZ7P41: { r: PAL },
             SZ7E41: { r: NTSC }
         },
-        strings: STRINGS_LEGACY
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JD2017,
+        isAvailable: true
     },
     {
         version: 2016,
@@ -125,7 +159,9 @@ const GAMES = [
             SJNP41: { r: PAL },
             SJNE41: { r: NTSC }
         },
-        strings: STRINGS_LEGACY
+        strings: STRINGS_LEGACY,
+        room: ROOMS.JD2016,
+        isAvailable: true
     },
     {
         version: 2015,
@@ -135,7 +171,8 @@ const GAMES = [
             SE3E41: { r: NTSC }
         },
         isJD15: true,
-        strings: STRINGS_2015
+        strings: STRINGS_2015,
+        isAvailable: true
     },
     {
         version: 2014,
@@ -145,7 +182,8 @@ const GAMES = [
             SJOE41: { r: NTSC }
         },
         isJD14: true,
-        strings: STRINGS_2014
+        strings: STRINGS_2014,
+        isAvailable: true
     },
     {
         version: 2,
@@ -155,9 +193,10 @@ const GAMES = [
         },
         isLyN: true,
         strings: STRINGS_LYN,
-        string: "Just Dance 2 SE"
+        string: "Just Dance 2 SE",
+        isAvailable: false
     }
-]
+];
 
 // Game IDs for JD2014 (including mods)
 const JD5_IDS = [
