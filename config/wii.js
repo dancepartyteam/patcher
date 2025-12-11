@@ -11,6 +11,11 @@ const VERSIONS = {
 const ROOMS = {
     LEGACY: 'legacy', // 2016 - 2017 - 2018 and above
     JD2015: 'jd2015', // 2015
+    JD2016: 'jd2016', // 2016
+    JD2017: 'jd2017', // 2017
+    JD2018: 'jd2018', // 2018
+    JD2019: 'jd2019', // 2019
+    JD2020: 'jd2020', // 2020
     JD5: 'jd5', // 2014
 };
 
@@ -22,29 +27,20 @@ const SERVERS = {
     }, {
         original: 'https://naswii.nintendowifi.net/pr',
         replacement: 'http://12000.termy.lol/pr'
-    }, {
-        original: "http://naswii.wiimmfi.de/ac",
-        replacement: 'http://12000.termy.lol/ac'
-    }, {
-        original: "http://naswii.wiimmfi.de/pr",
-        replacement: 'http://12000.termy.lol/pr'
     }],
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',
         replacement: 'http://s.ryuatelier.org/ecs/services/ECommerceSOAP'
     }],
     WDF_LEGACY: [{
-        original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6',
-        replacement: 'http://wdfjd6.termy.lol/legacy'
+        original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6/',
+        replacement: 'http://wdfjd6.termy.lol/legacy/'
     }, {
         original: 'https://wii-dance6-ws1.ubisoft.com',
         replacement: 'http://wdfjd6.termy.lol'
     }, {
         original: 'wdfjd6',
         replacement: 'legacy'
-    }, {
-        original: 'wii-dance6-ws1.ubisoft.com',
-        replacement: 'wdfjd6.termy.lol'
     }],
     WDF_JD2015: [{
         original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6',
