@@ -83,3 +83,12 @@ Please note that Just Dance 2019 and 2020 do not have World Dance Floor support 
 - [X] Just Dance Asia *(by Mitchy)*
 
 If you require further assistance, feel free to join our [Discord server](https://dnceprty.co/discord). We'll be happy to help!
+
+## Disclaimer
+DanceParty is an independent community-driven project created and maintained by the RyuAtelier team. We are not affiliated with, endorsed by, or connected to Ubisoft Entertainment, Nintendo, Microsoft, Sony Interactive Entertainment, or any of their subsidiaries or related companies. Just Dance and all related trademarks are the property of their respective owners. This project is developed by fans, for fans, and is provided free of charge.
+
+Contact us at hello@ryuatelier.org if you have any questions or concerns.
+
+## License
+
+Read more about the license [here.](https://github.com/dancepartyteam/patcher/blob/main/LICENSE)
