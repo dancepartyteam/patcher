@@ -75,7 +75,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
     process.exit(1);
   };
 
-  console.debug("Following strings will be replaced:", STRINGS_USED);
+  logger.debug("Following strings will be replaced: " + JSON.stringify(STRINGS_USED));
 
   if (game.isLyN) {
     logger.info("Detected a LyN game, patching NAS and Shop only...");

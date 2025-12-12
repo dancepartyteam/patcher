@@ -30,7 +30,7 @@ if (!existsSync(appDataPath)) {
 
   // Call CLI
   const cliArgs = await cli();
-  console.debug(cliArgs)
+  logger.debug(cliArgs);
   
   const platform = cliArgs.platform;
   const game = cliArgs.selectedGame;
@@ -46,8 +46,6 @@ if (!existsSync(appDataPath)) {
   global.appData = appDataPath;
   global.isDebug = debug || false;
   global.logLevel = global.isDebug ? "debug" : "info";
-
-  console.log("jfsmdf", inputPath)
 
   if (!existsSync(inputPath) || !statSync(inputPath).isFile()) {
     logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS, DOL or BIN file.`);
