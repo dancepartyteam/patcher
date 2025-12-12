@@ -1,0 +1,81 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on tags like v3.0.0, v3.1.0, etc.
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install pkg globally
+        run: npm install -g pkg
+
+      - name: Build with pkg
+        run: pkg .
+
+      - name: Rename executables
+        run: |
+          cd dist
+          mv patcher-win.exe patcher-windows-x64.exe
+          mv patcher-macos patcher-macos-x64
+          mv patcher-macos-arm64 patcher-macos-arm64
+          mv patcher-linux patcher-linux-x64
+          mv patcher-linuxstatic-arm64 patcher-linux-arm64
+
+      - name: Create checksums
+        run: |
+          cd dist
+          sha256sum * > checksums.txt
+
+      - name: Get tag name
+        id: tag_name
+        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/patcher-windows-x64.exe
+            dist/patcher-macos-x64
+            dist/patcher-macos-arm64
+            dist/patcher-linux-x64
+            dist/patcher-linux-arm64
+            dist/checksums.txt
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          name: Release ${{ steps.tag_name.outputs.TAG }}
+          body: |
+            ## Patcher ${{ steps.tag_name.outputs.TAG }}
+            
+            Download the appropriate version for your platform:
+            - **Windows**: `patcher-windows-x64.exe`
+            - **macOS Intel**: `patcher-macos-x64`
+            - **macOS Apple Silicon**: `patcher-macos-arm64`
+            - **Linux x64**: `patcher-linux-x64`
+            - **Linux ARM64**: `patcher-linux-arm64`
+            
+            ### Installation
+            1. Download the file for your platform
+            2. Make it executable (macOS/Linux): `chmod +x patcher-*`
+            3. Run it: `./patcher-* your-game-file.iso`
+            
+            For macOS users running Windows .exe files from the game patcher, Wine will be automatically used if available.
+            
+            See the full README for more information: https://github.com/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
