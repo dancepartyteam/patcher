@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const { resolve } = require("path");
 const { existsSync, statSync, mkdirSync } = require("fs");
 
