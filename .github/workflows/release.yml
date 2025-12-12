@@ -27,14 +27,11 @@ jobs:
       - name: Build with pkg
         run: pkg .
 
-      - name: Rename executables
+      - name: Rename executable
         run: |
           cd dist
-          mv patcher-win.exe patcher-windows-x64.exe
-          mv patcher-macos patcher-macos-x64
-          mv patcher-macos-arm64 patcher-macos-arm64
-          mv patcher-linux patcher-linux-x64
-          mv patcher-linuxstatic-arm64 patcher-linux-arm64
+          mv patcher.exe patcher-windows-x64.exe
+          ls -lah
 
       - name: Create checksums
         run: |
@@ -50,10 +47,6 @@ jobs:
         with:
           files: |
             dist/patcher-windows-x64.exe
-            dist/patcher-macos-x64
-            dist/patcher-macos-arm64
-            dist/patcher-linux-x64
-            dist/patcher-linux-arm64
             dist/checksums.txt
           draft: false
           prerelease: false
@@ -62,19 +55,13 @@ jobs:
           body: |
             ## Patcher ${{ steps.tag_name.outputs.TAG }}
             
-            Download the appropriate version for your platform:
-            - **Windows**: `patcher-windows-x64.exe`
-            - **macOS Intel**: `patcher-macos-x64`
-            - **macOS Apple Silicon**: `patcher-macos-arm64`
-            - **Linux x64**: `patcher-linux-x64`
-            - **Linux ARM64**: `patcher-linux-arm64`
+            Download for Windows:
+            - **Windows 64-bit**: `patcher-windows-x64.exe`
             
             ### Installation
-            1. Download the file for your platform
-            2. Make it executable (macOS/Linux): `chmod +x patcher-*`
-            3. Run it: `./patcher-* your-game-file.iso`
-            
-            For macOS users running Windows .exe files from the game patcher, Wine will be automatically used if available.
+            1. Download `patcher-windows-x64.exe`
+            2. Drag and drop your WBFS/ISO/DOL file onto the executable
+            3. Or run from command line: `patcher-windows-x64.exe your-game-file.iso`
             
             See the full README for more information: https://github.com/${{ github.repository }}
         env:
