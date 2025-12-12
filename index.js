@@ -8,6 +8,9 @@ const cli = require("./lib/cli");
 const utils = require("./lib/utils");
 const logger = require("./lib/logger");
 
+const Games = require("./lib/games");
+const { PLATFORMS } = require("./config");
+
 const exit = (code = 0) => {
   console.log("\nExiting in 10 seconds...");
   setTimeout(() => {
@@ -17,7 +20,7 @@ const exit = (code = 0) => {
 
 // Make sure our %APPDATA% folder exists each launch.
 const appDataPath = resolve(
-  process.env.APPDATA || 
+  process.env.APPDATA ||
   (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share"), project.name);
 
 if (!existsSync(appDataPath)) {
@@ -28,68 +31,54 @@ if (!existsSync(appDataPath)) {
 (async () => {
 
   // Call CLI
-  const args = cli();
+  const cliArgs = await cli();
+  console.debug(cliArgs)
+  
+  const platform = cliArgs.platform;
+  const game = cliArgs.selectedGame;
+  const gameId = cliArgs.gameId;
+  const region = cliArgs.region;
+  const inputPath = cliArgs.inputFile;
+  const format = cliArgs.format;
+  const debug = cliArgs.debug;
 
   // Set global variables
   global.root = __dirname;
   global.logger = logger;
-  global.project = project;
   global.appData = appDataPath;
-  global.args = args;
-  global.isDebug = (args.debug && args.debug == true) || false;
+  global.isDebug = debug || false;
   global.logLevel = global.isDebug ? "debug" : "info";
 
-  const Games = require("./lib/games");
+  console.log("jfsmdf", inputPath)
 
-  // Formats
-  const ISO = require("./formats/wii/iso");
-  const WBFS = require("./formats/wii//wbfs");
-  const DOL = require("./formats/wii/dol");
-
-  const inputPath = args["_"][0]; // Input file
   if (!existsSync(inputPath) || !statSync(inputPath).isFile()) {
     logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS, DOL or BIN file.`);
     process.exit(1);
   }
 
-  // Detect format of input file
-  // If input is DOL it will also find it's jdVersion via dol-game-finder lib
-  const detectedFormat = await utils.detectFormat(inputPath);
-  if (!detectedFormat) {
-    logger.error(`Couldn't detect the format of the input file, please provide an ISO, WBFS, DOL or BIN file.`);
-    process.exit(1);
-  };
+  if (platform == PLATFORMS.WII) {
+    logger.info("Patching Wii game...");
 
-  const { format, gameId, version } = detectedFormat;
-  const games = new Games();
+    // Formats
+    const ISO = require("./formats/wii/iso");
+    const WBFS = require("./formats/wii//wbfs");
+    const DOL = require("./formats/wii/dol");
 
-  let game;
-  let region;
-
-  // DOL file can only detect jdVersion, not region
-  if (format == "DOL") {
-    game = games.getGameByVersion(version);
-    logger.info(`Detected format: ${format}`);
-    logger.info(`Detected game: ${game.version}`);
+    switch (format.type) {
+      case "ISO":
+        await ISO({ game, gameId, region, version: game.version, inputFile: inputPath });
+        break;
+      case "WBFS":
+        await WBFS({ game, gameId, region, version: game.version, inputFile: inputPath });
+        break;
+      case "DOL":
+        await DOL({ game, gameId, region, version: game.version, inputFile: inputPath });
+        break;
+    };
   }
-  // WBFS and ISO
-  else {
-    game = games.getGameById(gameId);
-    region = game.ids[gameId].r;
-    logger.info(`Detected format: ${format}`);
-    logger.info(`Detected game: ${game.version} / ${gameId} (${region})`);
-  };
-
-  switch (format) {
-    case "ISO":
-      await ISO({ game, gameId, region, version: game.version, inputFile: inputPath });
-      break;
-    case "WBFS":
-      await WBFS({ game, gameId, region, version: game.version, inputFile: inputPath });
-      break;
-    case "DOL":
-      await DOL({ game, version: game.version, inputFile: inputPath });
-      break;
+  else if (platform == "PS3") {
+    logger.error("PS3 is not supported yet.");
+    process.exit(1);
   };
 
   exit();

@@ -5,6 +5,7 @@ const { resolve, dirname } = require("path");
 const replace = require("buffer-replace");
 
 const config = require("../../config");
+const utils = require("../../lib/utils");
 
 module.exports = async ({ format, game, gameId, region, version, inputFile, isFromFormat, backup = true }) => {
 
@@ -20,7 +21,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   });
 
   logger.success('DOL file loaded successfully.');
-
+  
   let jdVersion = version || game.version; // Game year, ex: 2014
 
   // 2014 games and 2014 mods have the same DOL but different game ID
@@ -29,7 +30,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
 
     // If gameId is not provided, find it from boot.bin file
     if (!gameId) {
-      const sysPath = inputDolPath.substring(0, inputDolPath.lastIndexOf('/'));
+      const sysPath = inputFile.substring(0, inputFile.lastIndexOf('/'));
       const bootPath = `${sysPath}/boot.bin`;
       // Check if boot.bin exists
       if (!fs.existsSync(sysPath) || !fs.existsSync(bootPath)) {
@@ -68,7 +69,14 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   };
 
   // Determine strings to be used with STRINGS_VERSION, if not exist, use default strings STRINGS_LEGACY
-  let STRINGS_USED = config.WII[`STRINGS_${version}`] || config.WII.STRINGS_LEGACY;
+  let STRINGS_USED = utils.getStrings(game, version);
+  if (!STRINGS_USED) {
+    logger.error(`No strings (to replace) were found for ${version}, please provide a valid game.`);
+    process.exit(1);
+  };
+
+  console.debug("Following strings will be replaced:", STRINGS_USED);
+
   if (game.isLyN) {
     logger.info("Detected a LyN game, patching NAS and Shop only...");
     STRINGS_USED = config.WII.STRINGS_LYN;

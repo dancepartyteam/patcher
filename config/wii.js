@@ -1,13 +1,3 @@
-
-// Game versions
-const PAL = "PAL";
-const NTSC = "NTSC";
-
-const VERSIONS = {
-    PAL: 'PAL',
-    NTSC: 'NTSC'
-};
-
 const ROOMS = {
     LEGACY: 'legacy', // 2016 - 2017 - 2018 and above
     JD2015: 'jd2015', // 2015
@@ -23,53 +13,35 @@ const ROOMS = {
 const SERVERS = {
     NAS: [{
         original: 'https://naswii.nintendowifi.net/ac',
-        replacement: 'http://12000.termy.lol/ac'
+        replacement: 'http://nas-wii.dnceprty.co/ac'
     }, {
         original: 'https://naswii.nintendowifi.net/pr',
-        replacement: 'http://12000.termy.lol/pr'
+        replacement: 'http://nas-wii.dnceprty.co/pr'
     }],
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',
-        replacement: 'http://s.ryuatelier.org/ecs/services/ECommerceSOAP'
+        replacement: 'http://s-wii.dnceprty.co/ecs/services/ECommerceSOAP'
     }],
     WDF_LEGACY: [{
         original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6/',
-        replacement: 'http://wdfjd6.termy.lol/legacy/'
+        replacement: 'http://wdf-jd6.dnceprty.co/legacy/'
     }, {
         original: 'https://wii-dance6-ws1.ubisoft.com',
-        replacement: 'http://wdfjd6.termy.lol'
-    }, {
-        original: 'wdfjd6',
-        replacement: 'legacy'
-    }],
-    WDF_JD2015: [{
-        original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6',
-        replacement: 'http://wdfjd6.termy.lol/jd2015'
-    }, {
-        original: 'https://wii-dance6-ws1.ubisoft.com',
-        replacement: 'http://wdfjd6.termy.lol'
-    }, {
-        original: 'wdfjd6',
-        replacement: 'jd2015'
-    }, {
-        original: 'wii-dance6-ws1.ubisoft.com',
-        replacement: 'wdfjd6.termy.lol'
+        replacement: 'http://wdf-jd6.dnceprty.co'
     }],
     WDF_JD5: [{
         original: 'https://tracking-wii-dance.ubisoft.com/wdf/',
-        replacement: 'http://wdf.termy.lol/'
+        replacement: 'http://wdf-jd5.dnceprty.co'
     }],
     JMCS: [{
         original: 'https://wii-dance6-ws2.ubisoft.com',
-        replacement: 'http://rvl-nodejsrv.ryuatelier.org'
+        replacement: 'http://jmcs-wii.dnceprty.co'
     }],
     TRACKING: [{
         original: 'https://tracking-wii-dance.ubisoft.com',
-        replacement: 'http://wiitrack.termy.lol'
+        replacement: 'http://tracking-wii.dnceprty.co'
     }]
 };
-
-
 
 // Strings for LEGACY replacement
 const STRINGS_LEGACY = [
@@ -99,105 +71,6 @@ const STRINGS_LYN = {
     ...SERVERS.SHOP
 };
 
-const GAMES = [
-    {
-        version: 1000,
-        name: "Just Dance Asia",
-        ids: {
-            ASIE41: { r: PAL },
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JDASIA,
-        isAvailable: false
-    },
-    {
-        version: 2020,
-        name: "Just Dance 2020",
-        ids: {
-            ASIE41: { r: PAL },
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JD2020,
-        isAvailable: false
-    },
-    {
-        version: 2019,
-        name: "Just Dance 2019",
-        ids: {
-            ASIE41: { r: PAL },
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JD2019,
-        isAvailable: false
-    },
-    {
-        version: 2018,
-        name: "Just Dance 2018",
-        ids: {
-            SE8P41: { r: PAL },
-            SE8E41: { r: NTSC }
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JD2018,
-        isAvailable: true
-    },
-    {
-        version: 2017,
-        name: "Just Dance 2017",
-        ids: {
-            SZ7P41: { r: PAL },
-            SZ7E41: { r: NTSC }
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JD2017,
-        isAvailable: true
-    },
-    {
-        version: 2016,
-        name: "Just Dance 2016",
-        ids: {
-            SJNP41: { r: PAL },
-            SJNE41: { r: NTSC }
-        },
-        strings: STRINGS_LEGACY,
-        room: ROOMS.JD2016,
-        isAvailable: true
-    },
-    {
-        version: 2015,
-        name: "Just Dance 2015",
-        ids: {
-            SE3P41: { r: PAL },
-            SE3E41: { r: NTSC }
-        },
-        isJD15: true,
-        strings: STRINGS_2015,
-        isAvailable: true
-    },
-    {
-        version: 2014,
-        name: "Just Dance 2014",
-        ids: {
-            SJOP41: { r: PAL },
-            SJOE41: { r: NTSC }
-        },
-        isJD14: true,
-        strings: STRINGS_2014,
-        isAvailable: true
-    },
-    {
-        version: 2,
-        name: "Just Dance 2 SE",
-        ids: {
-            SD2Y41: { r: NTSC }
-        },
-        isLyN: true,
-        strings: STRINGS_LYN,
-        string: "Just Dance 2 SE",
-        isAvailable: false
-    }
-];
-
 // Game IDs for JD2014 (including mods)
 const JD5_IDS = [
     'SJOP41', // JD2014 PAL
@@ -206,13 +79,11 @@ const JD5_IDS = [
 ];
 
 // These are our old server domains, this is used to detect DOL files with old URLs.
-const OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk"];
+const OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk", "termy.lol"];
 
 module.exports = {
-    VERSIONS,
     ROOMS,
     SERVERS,
-    GAMES,
     JD5_IDS,
     OLD_DOMAINS,
     STRINGS_2014,
