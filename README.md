@@ -26,7 +26,7 @@ To run Patcher with Node.JS, follow these steps:
 1. Ensure you have Node.JS version 16 or higher installed on your system.
 2. Clone the Patcher repository using the command: `git clone https://github.com/dancepartyteam/patcher.git && cd patcher-wii`
 3. Install the necessary dependencies with the command: `npm i`
-4. Once the installation is complete, you can run the tool and view the available CLI options by executing `node index.js`.
+4. Once the installation is complete, you can run the tool and view the available CLI options by executing `node index.js -h` or using the GUI by running `node index.js`.
 5. To patch a bundle directly, use the following command: `node index.js path/to/wbfs/iso/or/dol`.
    For example: `node index.js C:/Users/Example/Desktop/JD2016.iso`
 6. Patcher will automatically patch your ISO file and save it as a new file. If you're patching DOL files, it will create a backup for it.
