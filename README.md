@@ -1,6 +1,6 @@
 # Patcher
 
-Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii and PS3 to let you access the **DanceParty Legacy**.
+Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii and PS3 to let you access the [**DanceParty Legacy**](https://dnceprty.co/projects/legacy) servers.
 
 ## What files can I patch?
 - [X] ISO
@@ -80,7 +80,6 @@ Please note that Just Dance 2019 and 2020 do not have World Dance Floor support 
 
 ### Supported Mods
 
-- [X] Just Dance Japan *(by Yunyl)*
 - [X] Just Dance Asia *(by Mitchy)*
 
 If you require further assistance, feel free to join our [Discord server](https://dnceprty.co/discord). We'll be happy to help!
