@@ -36,7 +36,7 @@ const GAMES = [
         name: "Just Dance 2020",
         wii: {
             ids: {
-                S2UP41: { r: PAL },
+                //S2UP41: { r: PAL },
                 S2UE41: { r: NTSC },
             },
             strings: WII.STRINGS_LEGACY,
@@ -52,7 +52,7 @@ const GAMES = [
         name: "Just Dance 2019",
         wii: {
             ids: {
-                S5EP41: { r: PAL },
+                //S5EP41: { r: PAL },
                 S5EE41: { r: NTSC },
             },
             strings: WII.STRINGS_LEGACY,
