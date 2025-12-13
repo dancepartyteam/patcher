@@ -1,6 +1,6 @@
 {
   "name": "patcher",
-  "description": "Patcher patches games that are supported by DanceParty to have access to it's servers.",
+  "description": "Supports Just Dance 2 to 2020 including the spin-offs & mods for Wii and PS3.",
   "version": "3.0.0",
   "bin": "index.js",
   "main": "index.js",

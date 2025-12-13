@@ -25,7 +25,10 @@ const GAMES = [
             },
             strings: WII.STRINGS_LEGACY,
             room: WII.ROOMS.JDASIA,
-            isAvailable: false
+            isAvailable: true,
+            warnings: [
+                "Just Dance Asia requires modficiation of the files to enable WDF. Read https://docs.dnceprty.co/books/legacy/page/enabling-world-dance-floor-on-games-without-native-wdf-support for more information."
+            ]
         }
     },
     {
@@ -33,11 +36,15 @@ const GAMES = [
         name: "Just Dance 2020",
         wii: {
             ids: {
-                ASIE41: { r: PAL },
+                S2UP41: { r: PAL },
+                S2UE41: { r: NTSC },
             },
             strings: WII.STRINGS_LEGACY,
             room: WII.ROOMS.JD2020,
-            isAvailable: false
+            isAvailable: true,
+            warnings: [
+                "Just Dance 2020 requires modficiation of the files to enable WDF. Read https://docs.dnceprty.co/books/legacy/page/enabling-world-dance-floor-on-games-without-native-wdf-support for more information."
+            ]
         }
     },
     {
@@ -45,11 +52,15 @@ const GAMES = [
         name: "Just Dance 2019",
         wii: {
             ids: {
-                ASIE41: { r: PAL },
+                S5EP41: { r: PAL },
+                S5EE41: { r: NTSC },
             },
             strings: WII.STRINGS_LEGACY,
             room: WII.ROOMS.JD2019,
-            isAvailable: false
+            isAvailable: true,
+            warnings: [
+                "Just Dance 2019 requires modficiation of the files to enable WDF. Read https://docs.dnceprty.co/books/legacy/page/enabling-world-dance-floor-on-games-without-native-wdf-support for more information."
+            ]
         }
     },
     {
