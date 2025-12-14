@@ -40,8 +40,6 @@ if (!existsSync(appDataPath)) {
   const format = cliArgs.format;
   const debug = cliArgs.debug;
 
-  console.log(game, gameId)
-
   // Set global variables
   global.root = __dirname;
   global.logger = logger;
