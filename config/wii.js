@@ -1,3 +1,12 @@
+const DOMAINS = {
+    NAS: 'http://nas-wii.dnceprty.co',
+    SHOP: 'http://s-wii.dnceprty.co',
+    WDF_JD6: 'http://wdf-jd6.dnceprty.co',
+    WDF_JD5: 'http://wdf-jd5.dnceprty.co',
+    JMCS: 'http://jmcs-wii.dnceprty.co',
+    TRACKING: 'http://tracking-wii.dnceprty.co'
+};
+
 const ROOMS = {
     LEGACY: 'legacy', // 2016 - 2017 - 2018 and above
     JD2015: 'jd2015', // 2015
@@ -13,33 +22,95 @@ const ROOMS = {
 const SERVERS = {
     NAS: [{
         original: 'https://naswii.nintendowifi.net/ac',
-        replacement: 'http://nas-wii.dnceprty.co/ac'
+        replacement: `${DOMAINS.NAS}/ac`
     }, {
         original: 'https://naswii.nintendowifi.net/pr',
-        replacement: 'http://nas-wii.dnceprty.co/pr'
+        replacement: `${DOMAINS.NAS}/pr`
     }],
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',
-        replacement: 'http://s-wii.dnceprty.co/ecs/services/ECommerceSOAP'
+        replacement: `${DOMAINS.SHOP}/ecs/services/ECommerceSOAP`
     }],
     WDF_LEGACY: [{
         original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6/',
-        replacement: 'http://wdf-jd6.dnceprty.co/legacy/'
+        replacement: `${DOMAINS.WDF_JD6}/legacy/`
     }, {
         original: 'https://wii-dance6-ws1.ubisoft.com',
-        replacement: 'http://wdf-jd6.dnceprty.co'
+        replacement: DOMAINS.WDF_JD6
     }],
     WDF_JD5: [{
         original: 'https://tracking-wii-dance.ubisoft.com/wdf/',
-        replacement: 'http://wdf-jd5.dnceprty.co'
+        replacement: DOMAINS.WDF_JD5
     }],
-    JMCS: [{
-        original: 'https://wii-dance6-ws2.ubisoft.com',
-        replacement: 'http://jmcs-wii.dnceprty.co'
-    }],
+    JMCS: [
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/DancerCard/RequestDancerProfiles',
+            replacement: `${DOMAINS.JMCS}/DancerCard/RequestDancerProfiles`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/DancerCard/RequestDancerProfile',
+            replacement: `${DOMAINS.JMCS}/DancerCard/RequestDancerProfile`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/DancerCard/UploadDancerProfile',
+            replacement: `${DOMAINS.JMCS}/DancerCard/UploadDancerProfile`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/HighScores/uploadMyScore',
+            replacement: `${DOMAINS.JMCS}/HighScores/uploadMyScore`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/HighScores/lookForOpponentHighScores',
+            replacement: `${DOMAINS.JMCS}/HighScores/lookForOpponentHighScores`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/HighScores/lookForSpecificHighScore',
+            replacement: `${DOMAINS.JMCS}/HighScores/lookForSpecificHighScore`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/HighScores/getPartialScores',
+            replacement: `${DOMAINS.JMCS}/HighScores/getPartialScores`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/Leaderboard/getWorldWideLeaderBoard',
+            replacement: `${DOMAINS.JMCS}/Leaderboard/getWorldWideLeaderBoard`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/Leaderboard/getCountryLeaderBoard',
+            replacement: `${DOMAINS.JMCS}/Leaderboard/getCountryLeaderBoard`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/Mashup/getCurrentMap',
+            replacement: `${DOMAINS.JMCS}/Mashup/getCurrentMap`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/Mashup/getMetadata',
+            replacement: `${DOMAINS.JMCS}/Mashup/getMetadata`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/Profanity/checkProfanity',
+            replacement: `${DOMAINS.JMCS}/Profanity/checkProfanity`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/StarChallenge/getCommonData',
+            replacement: `${DOMAINS.JMCS}/StarChallenge/getCommonData`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/TokenPermission/getTokenPermission',
+            replacement: `${DOMAINS.JMCS}/TokenPermission/getTokenPermission`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com/ConstantProvider/getConstants',
+            replacement: `${DOMAINS.JMCS}/ConstantProvider/getConstants`
+        },
+        {
+            original: 'https://wii-dance6-ws2.ubisoft.com',
+            replacement: DOMAINS.JMCS
+        }
+    ],
     TRACKING: [{
         original: 'https://tracking-wii-dance.ubisoft.com',
-        replacement: 'http://tracking-wii.dnceprty.co'
+        replacement: DOMAINS.TRACKING
     }]
 };
 
@@ -82,6 +153,7 @@ const JD5_IDS = [
 const OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk", "termy.lol"];
 
 module.exports = {
+    DOMAINS,
     ROOMS,
     SERVERS,
     JD5_IDS,
