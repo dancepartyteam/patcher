@@ -59,10 +59,6 @@ jobs:
             - **Windows 64-bit**: `patcher-windows-x64.exe`
             
             ### Installation
-            1. Download `patcher-windows-x64.exe`
-            2. Drag and drop your WBFS/ISO/DOL file onto the executable
-            3. Or run from command line: `patcher-windows-x64.exe your-game-file.iso`
-            
-            See the full README for more information: https://github.com/${{ github.repository }}
+            Read more about how to use the patcher: https://docs.dnceprty.co/books/legacy/page/how-to-use-patcher
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

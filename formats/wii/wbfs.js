@@ -31,7 +31,7 @@ module.exports = async ({ game, gameId, region, version, inputFile }) => {
     // Patch the DOL
     await DOL({ game, gameId, version, inputFile: dolPath, isFromFormat: true, noBackup: true });
 
-    const patchedFilePath = utils.getPatchedFilePath(inputFile, format, game, gameId);
+    const patchedFilePath = utils.getPatchedFilePath(inputFile, format, game, gameId, "wii");
     // If output file exists from older patches, remove it
     if (existsSync(patchedFilePath)) {
         logger.warn(`Output path "${patchedFilePath}" already exists and it will be overwritten.`);
