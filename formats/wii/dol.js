@@ -90,7 +90,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
 
   for (const [key, value] of Object.entries(STRINGS_USED)) {
     // Skip shop URLs if they're optional
-    const isOptionalShop = value.original.includes("shop.wii.com");
+    const isOptionalShop = key.includes("shop.wii.com");
     if (!isOptionalShop) {
       totalStrings++;
     }
@@ -98,6 +98,13 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
     // value is now an object with 'original' and 'replacement' properties
     const original = value.original;
     const replacement = value.replacement;
+    const ignore = value?.ignore || [];
+
+    if (ignore.includes(jdVersion)) {
+      logger.debug(`Ignoring ${original} because it's not available in ${jdVersion}`);
+      totalStrings--;
+      continue;
+    }
 
     const keyLen = original.length;
     const valueLen = replacement.length;

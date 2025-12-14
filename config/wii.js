@@ -89,7 +89,8 @@ const SERVERS = {
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/Profanity/checkProfanity',
-            replacement: `${DOMAINS.JMCS}/Profanity/checkProfanity`
+            replacement: `${DOMAINS.JMCS}/Profanity/checkProfanity`,
+            ignore: [2014, 2015]
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/StarChallenge/getCommonData',
@@ -97,7 +98,8 @@ const SERVERS = {
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/TokenPermission/getTokenPermission',
-            replacement: `${DOMAINS.JMCS}/TokenPermission/getTokenPermission`
+            replacement: `${DOMAINS.JMCS}/TokenPermission/getTokenPermission`,
+            ignore: [2014, 2015]
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/ConstantProvider/getConstants',
@@ -109,8 +111,8 @@ const SERVERS = {
         }
     ],
     TRACKING: [{
-        original: 'https://tracking-wii-dance.ubisoft.com',
-        replacement: DOMAINS.TRACKING
+        original: 'https://tracking-wii-dance.ubisoft.com/',
+        replacement: DOMAINS.TRACKING + "/"
     }]
 };
 
@@ -124,23 +126,26 @@ const STRINGS_LEGACY = [
 ];
 // Strings for JD2015 replacement
 // Use the same strings as Legacy but replace legacy room name with JD2015
-const STRINGS_2015 = {
-    ...this.STRINGS_LEGACY,
-    [ROOMS.LEGACY]: ROOMS.JD2015
-};
+const STRINGS_2015 = [
+    ...STRINGS_LEGACY,
+    {
+        original: `/${ROOMS.LEGACY}/`,
+        replacement: `/${ROOMS.JD2015}/`
+    }
+];
 
 // Strings for JD2014 replacement
-const STRINGS_2014 = {
+const STRINGS_2014 = [
     ...SERVERS.NAS,
     ...SERVERS.SHOP,
     ...SERVERS.WDF_JD5,
     ...SERVERS.TRACKING
-};
+];
 
-const STRINGS_LYN = {
+const STRINGS_LYN = [
     ...SERVERS.NAS,
     ...SERVERS.SHOP
-};
+];
 
 // Game IDs for JD2014 (including mods)
 const JD5_IDS = [
