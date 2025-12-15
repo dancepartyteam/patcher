@@ -33,7 +33,7 @@ if (!existsSync(appDataPath)) {
   const currentVersion = project.version;
   const latestVersion = await utils.getLatestVersion();
   if (latestVersion && semver.gt(latestVersion, currentVersion)) {
-    console.log(`\nA new version of ${project.name} is available! (v${latestVersion})`);
+    console.log(`\nA new version of Patcher is available! (v${latestVersion})`);
     console.log(`You are currently running v${currentVersion}.`);
     console.log(`To update, please download the new version from ${project.homepage}/releases/latest`);
     process.exit(0);
