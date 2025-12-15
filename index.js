@@ -1,5 +1,6 @@
 const { resolve } = require("path");
 const { existsSync, statSync, mkdirSync } = require("fs");
+const semver = require("semver");
 
 const project = require("./package.json");
 const cli = require("./lib/cli");
@@ -27,6 +28,16 @@ if (!existsSync(appDataPath)) {
 
 // Entry function
 (async () => {
+
+  // Check for updates
+  const currentVersion = project.version;
+  const latestVersion = await utils.getLatestVersion();
+  if (latestVersion && semver.gt(latestVersion, currentVersion)) {
+    console.log(`\nA new version of ${project.name} is available! (v${latestVersion})`);
+    console.log(`You are currently running v${currentVersion}.`);
+    console.log(`To update, please download the new version from ${project.homepage}/releases/latest`);
+    process.exit(0);
+  };
 
   // Call CLI
   const cliArgs = await cli();
