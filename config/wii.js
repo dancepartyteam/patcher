@@ -40,7 +40,7 @@ const SERVERS = {
     }],
     WDF_JD5: [{
         original: 'https://tracking-wii-dance.ubisoft.com/wdf/',
-        replacement: DOMAINS.WDF_JD5
+        replacement: `${DOMAINS.WDF_JD5}/wdf/`
     }],
     JMCS: [
         {
