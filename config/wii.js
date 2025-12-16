@@ -91,7 +91,7 @@ const SERVERS = {
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/Profanity/checkProfanity',
             replacement: `${DOMAINS.JMCS}/Profanity/checkProfanity`,
-            ignore: [2014, 2015]
+            ignore: [2014, 2015, 2016, 2017]
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/StarChallenge/getCommonData',
@@ -100,7 +100,7 @@ const SERVERS = {
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/TokenPermission/getTokenPermission',
             replacement: `${DOMAINS.JMCS}/TokenPermission/getTokenPermission`,
-            ignore: [2014, 2015]
+            ignore: [2014, 2015, 2016, 2017]
         },
         {
             original: 'https://wii-dance6-ws2.ubisoft.com/ConstantProvider/getConstants',
