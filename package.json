@@ -1,7 +1,7 @@
 {
   "name": "patcher",
   "description": "Supports Just Dance 2 to 2020 including the spin-offs & mods for Wii and PS3.",
-  "version": "3.4.3",
+  "version": "3.5.0",
   "bin": "index.js",
   "main": "index.js",
   "homepage": "https://github.com/dancepartyteam/patcher",
