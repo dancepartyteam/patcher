@@ -29,7 +29,8 @@ const SERVERS = {
     }],
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',
-        replacement: `${DOMAINS.SHOP}/ecs/services/ECommerceSOAP`
+        replacement: `${DOMAINS.SHOP}/ecs/services/ECommerceSOAP`,
+        ignore: [2016, 2017, 2018, 2019, 2020, "ASIA"]
     }],
     WDF_LEGACY: [{
         original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6/',
@@ -111,6 +112,11 @@ const SERVERS = {
         }
     ],
     TRACKING: [{
+        original: 'https://tracking-wii-dance.ubisoft.com',
+        replacement: DOMAINS.TRACKING
+    }],
+    // this is stupid
+    TRACKING_JD5: [{
         original: 'https://tracking-wii-dance.ubisoft.com/',
         replacement: DOMAINS.TRACKING + "/"
     }]
@@ -139,7 +145,7 @@ const STRINGS_2014 = [
     ...SERVERS.NAS,
     ...SERVERS.SHOP,
     ...SERVERS.WDF_JD5,
-    ...SERVERS.TRACKING
+    ...SERVERS.TRACKING_JD5
 ];
 
 const STRINGS_LYN = [
@@ -155,7 +161,7 @@ const JD5_IDS = [
 ];
 
 // These are our old server domains, this is used to detect DOL files with old URLs.
-const OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk", "termy.lol"];
+const OLD_DOMAINS = ["danceparty.lol", "danceparty.online", "dancepartyonline.tk", "termy.lol", "ryuatelier.org"];
 
 module.exports = {
     DOMAINS,
