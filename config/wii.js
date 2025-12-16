@@ -150,7 +150,8 @@ const STRINGS_2014 = [
 
 const STRINGS_LYN = [
     ...SERVERS.NAS,
-    ...SERVERS.SHOP
+    ...SERVERS.SHOP,
+    ...SERVERS.TRACKING_JD5,
 ];
 
 // Game IDs for JD2014 (including mods)
