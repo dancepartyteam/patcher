@@ -16,7 +16,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   oldDomains.forEach(d => {
     if (mainDol.includes(Buffer.from(d))) {
       logger.error(`Your DOL file is not an original file because it contains our old servers and must be updated. Please update it by patching the original DOL file.`);
-      process.exit(1);
+      throw new Error('DOL file contains old server URLs');
     };
   });
 
@@ -37,7 +37,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
         logger.error(
           "Are you sure you selected a DOL file that's located in DATA/sys? Can't find boot.bin file..."
         );
-        process.exit(1);
+        throw new Error('boot.bin file not found');
       }
 
       // Read boot.bin data and determine the game ID
@@ -48,7 +48,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
     // Check if the JD5 game is available to patch
     if (!config.WII.JD5_IDS.includes(gameId)) {
       logger.error(`Your 'main.dol' ID ${gameId} is not available to patch.`);
-      process.exit(1);
+      throw new Error(`Game ID ${gameId} not supported`);
     };
 
     // Depending on some JD5 games, we need to change tracking information 
@@ -72,7 +72,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   let STRINGS_USED = utils.getStrings(game, version);
   if (!STRINGS_USED) {
     logger.error(`No strings (to replace) were found for ${version}, please provide a valid game.`);
-    process.exit(1);
+    throw new Error('No replacement strings found');
   };
 
   logger.debug("Following strings will be replaced: " + JSON.stringify(STRINGS_USED));
@@ -89,22 +89,26 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   const missingStrings = [];
 
   for (const [key, value] of Object.entries(STRINGS_USED)) {
-    // Skip shop URLs if they're optional
-    const isOptionalShop = key.includes("shop.wii.com");
-    if (!isOptionalShop) {
-      totalStrings++;
-    }
-
     // value is now an object with 'original' and 'replacement' properties
     const original = value.original;
     const replacement = value.replacement;
     const ignore = value?.ignore || [];
+    const required = value?.required !== false; // Default to true if not specified
 
+    // Skip ignored strings
     if (ignore.includes(jdVersion)) {
       logger.debug(`Ignoring ${original} because it's not available in ${jdVersion}`);
-      totalStrings--;
       continue;
     }
+    
+    // Skip non-required strings
+    if (!required) {
+      logger.debug(`Skipping ${original} because it's not required`);
+      continue;
+    }
+
+    // Only count required strings
+    totalStrings++;
 
     const keyLen = original.length;
     const valueLen = replacement.length;
@@ -132,25 +136,22 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
       logger.debug(`Replaced ${original} with ${replacement} / key len: ${keyLen} , val len: ${valueLen}`)
     }
     else {
-      // Only track missing non-shop URLs
-      if (!isOptionalShop) {
-        logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`);
-        missingStrings.push(original);
-      }
+      logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`);
+      missingStrings.push(original);
     };
   };
 
   // Check replacement results
   if (replacedCount === 0) {
     logger.error(`None of the strings were replaced. Your DOL file was not patched. Are you sure it's the original file?`);
-    process.exit(1);
+    throw new Error('No strings were replaced');
   }
 
   if (replacedCount < totalStrings) {
     logger.warn(`Warning: Only ${replacedCount} out of ${totalStrings} expected strings were replaced.`);
     logger.warn(`Missing strings: ${missingStrings.join(', ')}`);
     logger.warn(`This may indicate a corrupted, already-modified, or incorrect DOL file. Please provide an original DOL file to ensure proper patching.`);
-    process.exit(1);
+    throw new Error('Not all required strings were replaced');
   }
 
   logger.success(`DOL was patched successfully. ${replacedCount} strings replaced.`);

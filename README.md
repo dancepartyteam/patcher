@@ -1,13 +1,11 @@
 # Patcher
 
-Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii and PS3 to let you access the [**DanceParty Legacy**](https://dnceprty.co/projects/legacy) servers.
+Patcher is a user-friendly tool designed to simplify the process of patching your Just Dance games on Wii to let you access the [**DanceParty Legacy**](https://dnceprty.co/projects/legacy) servers.
 
 ## What files can I patch?
 - [X] ISO
 - [X] WBFS
 - [X] DOL `(main.dol)`
-- [ ] BIN `(EBOOT.bin)`
-  - PS3 patching is not currently supported.
 - [ ] NKIT / GCZ
   - NKIT files aren't currently supported. You can convert your NKIT files to ISO by using [NKIT tools by Vimm](https://vimm.net/vault/?p=nkit).
 

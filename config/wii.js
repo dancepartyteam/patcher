@@ -118,7 +118,8 @@ const SERVERS = {
     // this is stupid
     TRACKING_JD5: [{
         original: 'https://tracking-wii-dance.ubisoft.com/',
-        replacement: DOMAINS.TRACKING + "/"
+        replacement: DOMAINS.TRACKING + "/",
+        required: false
     }]
 };
 

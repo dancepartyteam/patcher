@@ -11,4 +11,16 @@ logs/
 
 *.log
 
+*.bin
+*.self
+*.elf
+
+tests/
+
 package-lock.json
+
+*.bak
+
+temp/
+
+*.zip

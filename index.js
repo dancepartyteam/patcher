@@ -11,10 +11,10 @@ const Games = require("./lib/games");
 const { PLATFORMS } = require("./config");
 
 const exit = (code = 0) => {
-  console.log("\nExiting in 10 seconds...");
-  setTimeout(() => {
-    process.exit(code);
-  }, 10000);
+    console.log("\nPress any key to exit...");
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', () => process.exit(code));
 };
 
 // Make sure our %APPDATA% folder exists each launch.
@@ -59,7 +59,7 @@ if (!existsSync(appDataPath)) {
   global.logLevel = global.isDebug ? "debug" : "info";
 
   if (!existsSync(inputPath) || !statSync(inputPath).isFile()) {
-    logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS, DOL or BIN file.`);
+    logger.error(`Provided path does not exist or it's not a file, please provide an ISO, WBFS or DOL file.`);
     process.exit(1);
   }
 
@@ -92,11 +92,11 @@ if (!existsSync(appDataPath)) {
 })();
 
 process.on("unhandledRejection", (reason, p) => {
-  logger.error(reason, "Unhandled Rejection at Promise", p);
-  exit();
+    logger.error(reason, "Unhandled Rejection at Promise", p);
+    exit(1);
 });
 
 process.on("uncaughtException", err => {
-  logger.error(err, "Uncaught Exception thrown");
-  exit(1);
+    logger.error(err, "Uncaught Exception thrown");
+    exit(1);
 });
