@@ -21,7 +21,7 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   });
 
   logger.success('DOL file loaded successfully.');
-  
+
   let jdVersion = version || game.version; // Game year, ex: 2014
 
   // 2014 games and 2014 mods have the same DOL but different game ID
@@ -89,56 +89,38 @@ module.exports = async ({ format, game, gameId, region, version, inputFile, isFr
   const missingStrings = [];
 
   for (const [key, value] of Object.entries(STRINGS_USED)) {
-    // value is now an object with 'original' and 'replacement' properties
     const original = value.original;
     const replacement = value.replacement;
     const ignore = value?.ignore || [];
-    const required = value?.required !== false; // Default to true if not specified
+    const required = value?.required !== false; // Default to true
 
     // Skip ignored strings
-    if (ignore.includes(jdVersion)) {
-      logger.debug(`Ignoring ${original} because it's not available in ${jdVersion}`);
-      continue;
-    }
-    
-    // Skip non-required strings
-    if (!required) {
-      logger.debug(`Skipping ${original} because it's not required`);
-      continue;
-    }
+    if (ignore.includes(jdVersion)) continue;
 
     // Only count required strings
-    totalStrings++;
+    if (required) totalStrings++;
+    else logger.debug(`Skipping optional string: ${original}`);
 
     const keyLen = original.length;
     const valueLen = replacement.length;
     const keyBuffer = Buffer.from(original);
     let valueBuffer = Buffer.from(replacement);
 
-    // str to replace is shorter than original value so we have to add extra 00 at the end
     if (keyLen > valueLen) {
-      logger.debug("---------- VALUE SHORTER THAN ORIGINAL ----------");
-
       const diff = keyLen - valueLen;
-      const nulls = Array(diff).fill('00').join('');
-      const nullsBuf = Buffer.from(nulls, 'hex');
+      const nullsBuf = Buffer.alloc(diff, 0x00);
       valueBuffer = Buffer.concat([valueBuffer, nullsBuf]);
-
-      logger.debug(`${replacement} is shorter than ${original} with difference: ${keyLen - valueLen} / ${keyLen} ${valueLen}`);
-      logger.debug();
-      logger.debug("------------------------------------------------");
-    };
-
-    if (mainDol.includes(keyBuffer)) {
-      replacedData = replace(mainDol, keyBuffer, valueBuffer);
-      mainDol = replacedData;
-      replacedCount++;
-      logger.debug(`Replaced ${original} with ${replacement} / key len: ${keyLen} , val len: ${valueLen}`)
     }
-    else {
-      logger.debug(`${original} doesn't exist in the DOL file, are you sure it's the original file?`);
+
+    // Replace if it exists
+    if (mainDol.includes(keyBuffer)) {
+      mainDol = replace(mainDol, keyBuffer, valueBuffer);
+      replacedCount++;
+      logger.debug(`Replaced ${original} with ${replacement}`);
+    } else if (required) {
       missingStrings.push(original);
-    };
+      logger.debug(`${original} not found in DOL`);
+    }
   };
 
   // Check replacement results
