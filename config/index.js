@@ -171,23 +171,7 @@ const GAMES = [
                 "Just Dance 2020 requires modficiation of the files to enable WDF. Read https://docs.dnceprty.co/books/legacy/page/enabling-world-dance-floor-on-games-without-native-wdf-support for more information."
             ]
         }
-    },
-    // --- Just Dance Asia ---
-    {
-        version: 1000,
-        name: "Just Dance Asia",
-        wii: {
-            ids: {
-                ASIE41: { r: PAL },
-            },
-            strings: WII.STRINGS_LEGACY,
-            room: WII.ROOMS.JDASIA,
-            isAvailable: false, // no longer available, the game now comes patched
-            warnings: [
-                "Just Dance Asia requires modficiation of the files to enable WDF. Read https://docs.dnceprty.co/books/legacy/page/enabling-world-dance-floor-on-games-without-native-wdf-support for more information."
-            ]
-        }
-    },
+    }
 ];
 
 module.exports = {

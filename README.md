@@ -76,10 +76,6 @@ To obtain the DOL file, you can extract it by dumping the files from your **lega
 
 Please note that Just Dance 2019 and 2020 do not have World Dance Floor support and their support is added by modifiying the game. Read more about it [here](https://docs.dnceprty.co/books/legacy/page/how-to-enable-world-dance-floor-on-2019-and-2020-for-wii).
 
-### Supported Mods
-
-- [X] Just Dance Asia *(by Mitchy)*
-
 If you require further assistance, feel free to join our [Discord server](https://dnceprty.co/discord). We'll be happy to help!
 
 ## Disclaimer

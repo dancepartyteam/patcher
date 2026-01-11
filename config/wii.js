@@ -15,7 +15,6 @@ const ROOMS = {
     JD2018: 'jd2018', // 2018
     JD2019: 'jd2019', // 2019
     JD2020: 'jd2020', // 2020
-    JDASIA: 'jdasia', // JD Asia
     JD5: 'jd5', // 2014
 };
 
@@ -30,7 +29,7 @@ const SERVERS = {
     SHOP: [{
         original: 'https://ecs.shop.wii.com/ecs/services/ECommerceSOAP',
         replacement: `${DOMAINS.SHOP}/ecs/services/ECommerceSOAP`,
-        ignore: [2016, 2017, 2018, 2019, 2020, "ASIA"]
+        ignore: [2016, 2017, 2018, 2019, 2020]
     }],
     WDF_LEGACY: [{
         original: 'https://wii-dance6-ws1.ubisoft.com/wdfjd6/',
